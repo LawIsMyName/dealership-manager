@@ -6,12 +6,15 @@ import com.pluralsight.dealershipmanager.model.SalesContract;
 import com.pluralsight.dealershipmanager.model.Vehicle;
 
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class ContractDataManager {
 
     public void saveContract(Contract contract) {
         Vehicle vehicle = contract.getVehicleSold();
-        String date = contract.getDate().format(String.valueOf(DateTimeFormatter.ofPattern("yyyyMMdd")));
+        String date = LocalDate.parse(contract.getDate()).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String line = "";
 
         if (contract instanceof SalesContract) {
@@ -19,5 +22,21 @@ public class ContractDataManager {
         } else if (contract instanceof LeaseContract) {
             line = "LEASE";
         }
+
+        line += "|" + date;
+        line += "|" + contract.getCustomerName();
+        line += "|" + contract.getCustomerEmail();
+        line += "|" + vehicle.getVin();
+        line += "|" + vehicle.getYear();
+        line += "|" + vehicle.getMake();
+        line += "|" + vehicle.getModel();
+        line += "|" + vehicle.getVehicleType();
+        line += "|" + vehicle.getColor();
+        line += "|" + vehicle.getOdometer();
+        line += "|" + formatMoney(vehicle.getPrice());
     }
+    private String formatMoney(BigDecimal amount) {
+        return amount.setScale(2, RoundingMode.HALF_UP).toPlainString();
+    }
+
 }

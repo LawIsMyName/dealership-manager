@@ -34,7 +34,16 @@ public class ContractDataManager {
         line += "|" + vehicle.getColor();
         line += "|" + vehicle.getOdometer();
         line += "|" + formatMoney(vehicle.getPrice());
+
+        if (contract instanceof SalesContract sale) {
+            line += "|" + formatMoney(sale.getTotalPrice());
+            line += "|" + formatMoney(sale.getMonthlyPayment());
+        } else if (contract instanceof LeaseContract lease) {
+            line += "|" + formatMoney(lease.getTotalPrice());
+            line += "|" + formatMoney(lease.getMonthlyPayment());
+        }
     }
+
     private String formatMoney(BigDecimal amount) {
         return amount.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }

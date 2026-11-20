@@ -53,12 +53,12 @@ public class UserInterface {
 
         init();
 
-        displayWelcomeScreen();
-
         if (dealership == null) {
             System.out.println("Unable to load dealership inventory.");
             return;
         }
+
+        displayWelcomeScreen();
 
         boolean running = true;
 

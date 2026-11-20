@@ -244,3 +244,10 @@ if (!saved) {
 This prevents the vehicle from being removed when the contract saving operation reports a failure.
 
 It also helped me understand why checking the results of file operations is important.
+
+# Screenshots:
+## Welcome Screen
+![Homemenu.png](images/Homemenu.png)
+
+## List All Vehicles 
+![ListAll.png](images/ListAll.png)

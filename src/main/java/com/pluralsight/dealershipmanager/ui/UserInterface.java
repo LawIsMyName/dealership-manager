@@ -313,7 +313,7 @@ public class UserInterface {
 
         String contractType = promptForString("Sale or lease: ");
 
-        Contract contract;
+        Contract contract = null;
 
         String contractDate = LocalDate.now().toString();
 
@@ -325,6 +325,18 @@ public class UserInterface {
                 System.out.println("Invalid financing option.");
                 return;
             }
+
+            if (contract == null) {
+                System.out.println("Unable to create contract.");
+                return;
+            }
+
+            System.out.println();
+            System.out.println("---- CONTRACT SUMMARY ----");
+            System.out.println("Customer: " + customerName);
+            System.out.println("Vehicle: " + selectedVehicle.getYear() + " " + selectedVehicle.getMake() + " " + selectedVehicle.getModel());
+            System.out.printf("Total Price: $%.2f%n", contract.getTotalPrice());
+            System.out.printf("Monthly Payment: $%.2f%n", contract.getMonthlyPayment());
 
             boolean financed = financeAnswer.equalsIgnoreCase("yes");
 

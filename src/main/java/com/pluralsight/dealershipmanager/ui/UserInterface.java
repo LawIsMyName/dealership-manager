@@ -337,7 +337,7 @@ public class UserInterface {
                 return;
             }
 
-            dealership.removeVehicle(selectedVehicle);
+            contract = new LeaseContract(contractDate, customerName, customerEmail, selectedVehicle);
 
         } else {
 

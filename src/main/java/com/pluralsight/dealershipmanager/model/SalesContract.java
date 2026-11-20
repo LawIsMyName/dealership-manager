@@ -1,6 +1,7 @@
 package com.pluralsight.dealershipmanager.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class SalesContract extends Contract {
 
@@ -38,4 +39,30 @@ public class SalesContract extends Contract {
         return price.add(salesTax).add(recordingFee).add(getProcessingFee());
     }
 
+    @Override
+    public BigDecimal getMonthlyPayment() {
+        if (!financed) {
+            return BigDecimal.ZERO.setScale(2);
+        }
+
+        BigDecimal price = getVehicleSold().getPrice();
+        BigDecimal annualRate;
+        int months;
+
+        if (price.compareTo(new BigDecimal("10000")) >= 0) {
+            annualRate = new BigDecimal("0.0425");
+            months = 48;
+        } else {
+            annualRate = new BigDecimal("0.0525");
+            months = 24;
+        }
+
+        double monthlyRate = annualRate.doubleValue() / 12;
+        double principal = getTotalPrice().doubleValue();
+        double monthlyPayment = principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
+
+        return BigDecimal.valueOf(monthlyPayment).setScale(2, RoundingMode.HALF_UP);
+    }
 }
+
+

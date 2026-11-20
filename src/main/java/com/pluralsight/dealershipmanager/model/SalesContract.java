@@ -46,22 +46,12 @@ public class SalesContract extends Contract {
         }
 
         BigDecimal price = getVehicleSold().getPrice();
-        BigDecimal annualRate;
-        int months;
 
         if (price.compareTo(new BigDecimal("10000")) >= 0) {
-            annualRate = new BigDecimal("0.0425");
-            months = 48;
-        } else {
-            annualRate = new BigDecimal("0.0525");
-            months = 24;
+            return LoanCalculator.calculateMonthlyPayment(getTotalPrice(), new BigDecimal("4.25"), 48);
         }
 
-        double monthlyRate = annualRate.doubleValue() / 12;
-        double principal = getTotalPrice().doubleValue();
-        double monthlyPayment = principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
-
-        return BigDecimal.valueOf(monthlyPayment).setScale(2, RoundingMode.HALF_UP);
+        return LoanCalculator.calculateMonthlyPayment(getTotalPrice(), new BigDecimal("5.25"), 24);
     }
 }
 

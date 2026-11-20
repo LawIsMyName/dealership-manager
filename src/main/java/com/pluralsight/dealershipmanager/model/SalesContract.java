@@ -8,4 +8,12 @@ public class SalesContract extends Contract {
         super(date, customerName, customerEmail, vehicleSold);
         this.financed = financed;
     }
+
+    public boolean isFinanced() {
+        return financed;
+    }
+
+    public void setFinanced(boolean financed) {
+        this.financed = financed;
+    }
 }

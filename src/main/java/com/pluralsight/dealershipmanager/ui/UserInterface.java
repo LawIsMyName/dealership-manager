@@ -242,6 +242,12 @@ public class UserInterface {
             return;
         }
 
+        String customerName = promptForString("Enter customer name: ");
+
+        String customerEmail = promptForString("Enter customer email: ");
+
+        String contractType = promptForString("Sale or lease: ");
+
         Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
 
         dealership.addVehicle(vehicle);

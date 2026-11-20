@@ -7,6 +7,10 @@ import com.pluralsight.dealershipmanager.model.Vehicle;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
+import com.pluralsight.dealershipmanager.model.Contract;
+import com.pluralsight.dealershipmanager.model.SalesContract;
+import com.pluralsight.dealershipmanager.model.LeaseContract;
+import java.time.LocalDate;
 
 public class UserInterface {
 
@@ -242,12 +246,6 @@ public class UserInterface {
             return;
         }
 
-        String customerName = promptForString("Enter customer name: ");
-
-        String customerEmail = promptForString("Enter customer email: ");
-
-        String contractType = promptForString("Sale or lease: ");
-
         Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
 
         dealership.addVehicle(vehicle);
@@ -308,6 +306,12 @@ public class UserInterface {
             System.out.println("Vehicle not found.");
             return;
         }
+
+        String customerName = promptForString("Enter customer name: ");
+
+        String customerEmail = promptForString("Enter customer email: ");
+
+        String contractType = promptForString("Sale or lease: ");
 
     }
 

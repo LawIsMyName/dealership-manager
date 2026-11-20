@@ -1,5 +1,6 @@
 package com.pluralsight.dealershipmanager;
 
+import com.pluralsight.dealershipmanager.data.ContractDataManager;
 import com.pluralsight.dealershipmanager.model.LeaseContract;
 import com.pluralsight.dealershipmanager.model.SalesContract;
 import com.pluralsight.dealershipmanager.model.Vehicle;
@@ -26,6 +27,10 @@ public class Program {
         UserInterface userInterface = new UserInterface();
 
         userInterface.display();
+
+        ContractDataManager manager = new ContractDataManager();
+
+        manager.saveContract(sale);
     }
 }
 

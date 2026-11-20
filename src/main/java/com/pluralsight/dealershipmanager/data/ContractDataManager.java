@@ -52,7 +52,6 @@ public class ContractDataManager {
             System.out.println("Contract saved successfully!");
 
         } catch (IOException e) {
-
             System.out.println("Error saving contract.");
         }
     }

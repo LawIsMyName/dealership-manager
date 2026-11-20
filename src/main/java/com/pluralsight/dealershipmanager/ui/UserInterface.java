@@ -340,7 +340,12 @@ public class UserInterface {
             System.out.printf("Monthly Payment: $%.2f%n", contract.getMonthlyPayment());
 
             ContractDataManager manager = new ContractDataManager();
-            manager.saveContract(contract);
+            boolean saved = manager.saveContract(contract);
+
+            if (!saved) {
+                System.out.println("Contract could not be saved. Vehicle will remain in inventory.");
+                return;
+            }
 
             boolean financed = financeAnswer.equalsIgnoreCase("yes");
 

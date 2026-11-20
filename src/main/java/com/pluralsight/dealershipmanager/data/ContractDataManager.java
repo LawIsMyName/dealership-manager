@@ -14,7 +14,7 @@ import java.math.RoundingMode;
 
 public class ContractDataManager {
 
-    public void saveContract(Contract contract) {
+    public boolean saveContract(Contract contract) {
         Vehicle vehicle = contract.getVehicleSold();
         String date = LocalDate.parse(contract.getDate()).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String line = "";
@@ -50,9 +50,11 @@ public class ContractDataManager {
             writer.write(line + "\n");
 
             System.out.println("Contract saved successfully!");
+            return true;
 
         } catch (IOException e) {
             System.out.println("Error saving contract.");
+            return false;
         }
     }
 

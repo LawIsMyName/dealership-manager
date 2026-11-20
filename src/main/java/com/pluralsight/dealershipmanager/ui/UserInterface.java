@@ -309,13 +309,10 @@ public class UserInterface {
         }
 
         String customerName = promptForString("Enter customer name: ");
-
         String customerEmail = promptForString("Enter customer email: ");
-
         String contractType = promptForString("Sale or lease: ");
 
         Contract contract = null;
-
         String contractDate = LocalDate.now().toString();
 
         if (contractType.equalsIgnoreCase("sale")) {
@@ -326,34 +323,6 @@ public class UserInterface {
                 System.out.println("Invalid financing option.");
                 return;
             }
-
-            if (contract == null) {
-                System.out.println("Unable to create contract.");
-                return;
-            }
-
-            System.out.println();
-            System.out.println("---- CONTRACT SUMMARY ----");
-            System.out.println("Customer: " + customerName);
-            System.out.println("Vehicle: " + selectedVehicle.getYear() + " " + selectedVehicle.getMake() + " " + selectedVehicle.getModel());
-            System.out.printf("Total Price: $%.2f%n", contract.getTotalPrice());
-            System.out.printf("Monthly Payment: $%.2f%n", contract.getMonthlyPayment());
-
-            ContractDataManager manager = new ContractDataManager();
-            boolean saved = manager.saveContract(contract);
-
-            if (!saved) {
-                System.out.println("Contract could not be saved. Vehicle will remain in inventory.");
-                return;
-            }
-
-            dealership.removeVehicle(selectedVehicle);
-
-            DealershipFileManager fileManager = new DealershipFileManager();
-            fileManager.saveDealership(dealership);
-
-            System.out.println("Vehicle removed from inventory.");
-
 
             boolean financed = financeAnswer.equalsIgnoreCase("yes");
 
@@ -375,6 +344,33 @@ public class UserInterface {
             System.out.println("Invalid contract type.");
             return;
         }
+
+        if (contract == null) {
+            System.out.println("Unable to create contract.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("---- CONTRACT SUMMARY ----");
+        System.out.println("Customer: " + customerName);
+        System.out.println("Vehicle: " + selectedVehicle.getYear() + " " + selectedVehicle.getMake() + " " + selectedVehicle.getModel());
+        System.out.printf("Total Price: $%.2f%n", contract.getTotalPrice());
+        System.out.printf("Monthly Payment: $%.2f%n", contract.getMonthlyPayment());
+
+        ContractDataManager manager = new ContractDataManager();
+        boolean saved = manager.saveContract(contract);
+
+        if (!saved) {
+            System.out.println("Contract could not be saved. Vehicle will remain in inventory.");
+            return;
+        }
+
+        dealership.removeVehicle(selectedVehicle);
+
+        DealershipFileManager fileManager = new DealershipFileManager();
+        fileManager.saveDealership(dealership);
+
+        System.out.println("Vehicle removed from inventory.");
 
     }
 

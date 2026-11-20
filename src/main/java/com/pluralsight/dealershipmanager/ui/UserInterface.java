@@ -46,6 +46,7 @@ public class UserInterface {
                 case "7" -> processGetAllVehiclesRequest();
                 case "8" -> processAddVehicleRequest();
                 case "9" -> processRemoveVehicleRequest();
+                case "10" -> processSellOrLeaseVehicleRequest();
                 case "0" -> {
                     System.out.println("Goodbye!");
                     running = false;
@@ -68,6 +69,7 @@ public class UserInterface {
         System.out.println("7) List all vehicles");
         System.out.println("8) Add a vehicle");
         System.out.println("9) Remove a vehicle");
+        System.out.println("10) Sell or lease a vehicle");
         System.out.println("0) Exit");
         System.out.print("Enter your choice: ");
     }

@@ -286,6 +286,23 @@ public class UserInterface {
     private void processSellOrLeaseVehicleRequest() {
         System.out.println("---- SELL OR LEASE VEHICLE ----");
 
+        int vin = promptForInt("Enter VIN: ");
+
+        Vehicle selectedVehicle = null;
+
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+
+            if (vehicle.getVin() == vin) {
+                selectedVehicle = vehicle;
+                break;
+            }
+        }
+
+        if (selectedVehicle == null) {
+            System.out.println("Vehicle not found.");
+            return;
+        }
+
     }
 
     private void displayVehicles(ArrayList<Vehicle> vehicles) {

@@ -29,4 +29,13 @@ public class SalesContract extends Contract {
         return new BigDecimal("495.00");
     }
 
+    @Override
+    public BigDecimal getTotalPrice() {
+        BigDecimal price = getVehicleSold().getPrice();
+        BigDecimal salesTax = price.multiply(new BigDecimal("0.05"));
+        BigDecimal recordingFee = new BigDecimal("100.00");
+
+        return price.add(salesTax).add(recordingFee).add(getProcessingFee());
+    }
+
 }

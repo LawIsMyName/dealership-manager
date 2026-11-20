@@ -26,9 +26,34 @@ public class UserInterface {
 
     }
 
+    private void displayWelcomeScreen() {
+        System.out.println();
+        System.out.println("===========================================================");
+        System.out.println("                  WELCOME TO THE");
+        System.out.println();
+        System.out.println("   CCCCC    AAAAA   RRRRR     SSSSS   H   H   OOOOO   PPPPP");
+        System.out.println("  C        A     A  R    R   S        H   H  O     O  P    P");
+        System.out.println("  C        AAAAAAA  RRRRR     SSSSS   HHHHH  O     O  PPPPP");
+        System.out.println("  C        A     A  R   R          S  H   H  O     O  P");
+        System.out.println("   CCCCC   A     A  R    R    SSSSS   H   H   OOOOO   P");
+        System.out.println();
+        System.out.println("===========================================================");
+        System.out.println("               DRIVE YOUR DEALERSHIP FORWARD");
+        System.out.println("===========================================================");
+        System.out.println();
+        System.out.println("              INVENTORY | SALES | LEASING");
+        System.out.println();
+        System.out.println("                   SYSTEM READY");
+        System.out.println();
+        System.out.print("          Press Enter to enter the showroom...");
+        scanner.nextLine();
+    }
+
     public void display() {
 
         init();
+
+        displayWelcomeScreen();
 
         if (dealership == null) {
             System.out.println("Unable to load dealership inventory.");

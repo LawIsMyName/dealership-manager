@@ -365,6 +365,8 @@ public class UserInterface {
             DealershipFileManager fileManager = new DealershipFileManager();
             fileManager.saveDealership(dealership);
 
+            System.out.println("Vehicle removed from inventory.");
+
             contract = new LeaseContract(contractDate, customerName, customerEmail, selectedVehicle);
 
         } else {

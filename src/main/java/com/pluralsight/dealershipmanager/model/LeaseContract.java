@@ -19,4 +19,10 @@ public class LeaseContract extends Contract{
         return endingValue.add(leaseFee);
     }
 
+    @Override
+    public BigDecimal getMonthlyPayment() {
+        return LoanCalculator.calculateMonthlyPayment(getTotalPrice(), new BigDecimal("4.0"), 36);
+    }
 }
+
+

@@ -7,9 +7,11 @@ import com.pluralsight.dealershipmanager.model.Vehicle;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import com.pluralsight.dealershipmanager.model.Contract;
 import com.pluralsight.dealershipmanager.model.SalesContract;
 import com.pluralsight.dealershipmanager.model.LeaseContract;
+
 import java.time.LocalDate;
 
 public class UserInterface {
@@ -106,18 +108,16 @@ public class UserInterface {
     }
 
     private void processGetByMakeModelRequest() {
-            System.out.println("---- SEARCH BY MAKE/MODEL ----");
+        System.out.println("---- SEARCH BY MAKE/MODEL ----");
 
-            System.out.print("Enter make: ");
-            String make = scanner.nextLine();
+        System.out.print("Enter make: ");
+        String make = scanner.nextLine();
 
-            System.out.print("Enter model: ");
-            String model = scanner.nextLine();
+        System.out.print("Enter model: ");
+        String model = scanner.nextLine();
 
-            ArrayList<Vehicle> vehicles = dealership.getVehiclesByMakeModel(make, model);
-            displayVehicles(vehicles);
-
-
+        ArrayList<Vehicle> vehicles = dealership.getVehiclesByMakeModel(make, model);
+        displayVehicles(vehicles);
     }
 
     private void processGetByYearRequest() {
@@ -145,14 +145,14 @@ public class UserInterface {
     }
 
     private void processGetByColorRequest() {
-            System.out.println("---- SEARCH BY COLOR ----");
+        System.out.println("---- SEARCH BY COLOR ----");
 
-            System.out.print("Enter color: ");
-            String color = scanner.nextLine();
+        System.out.print("Enter color: ");
+        String color = scanner.nextLine();
 
-            ArrayList<Vehicle> vehicles = dealership.getVehiclesByColor(color);
+        ArrayList<Vehicle> vehicles = dealership.getVehiclesByColor(color);
 
-            displayVehicles(vehicles);
+        displayVehicles(vehicles);
     }
 
     private void processGetByMileageRequest() {
@@ -184,14 +184,14 @@ public class UserInterface {
     }
 
     private void processGetByTypeRequest() {
-            System.out.println("---- SEARCH BY VEHICLE TYPE ----");
+        System.out.println("---- SEARCH BY VEHICLE TYPE ----");
 
-            System.out.print("Enter vehicle type: ");
-            String type = scanner.nextLine();
+        System.out.print("Enter vehicle type: ");
+        String type = scanner.nextLine();
 
-            ArrayList<Vehicle> vehicles = dealership.getVehiclesByType(type);
+        ArrayList<Vehicle> vehicles = dealership.getVehiclesByType(type);
 
-            displayVehicles(vehicles);
+        displayVehicles(vehicles);
     }
 
     private void processGetAllVehiclesRequest() {
@@ -313,6 +313,40 @@ public class UserInterface {
 
         String contractType = promptForString("Sale or lease: ");
 
+        Contract contract;
+
+        String contractDate = LocalDate.now().toString();
+
+        if (contractType.equalsIgnoreCase("sale")) {
+
+            String financeAnswer = promptForString("Finance vehicle? (yes/no): ");
+
+            if (!financeAnswer.equalsIgnoreCase("yes") && !financeAnswer.equalsIgnoreCase("no")) {
+                System.out.println("Invalid financing option.");
+                return;
+            }
+
+            boolean financed = financeAnswer.equalsIgnoreCase("yes");
+
+            contract = new SalesContract(contractDate, customerName, customerEmail, selectedVehicle, financed);
+
+        } else if (contractType.equalsIgnoreCase("lease")) {
+
+            int vehicleAge = LocalDate.now().getYear() - selectedVehicle.getYear();
+
+            if (vehicleAge > 3) {
+                System.out.println("Vehicles over 3 years old cannot be leased.");
+                return;
+            }
+
+            contract = new LeaseContract(contractDate, customerName, customerEmail, selectedVehicle);
+
+        } else {
+
+            System.out.println("Invalid contract type.");
+            return;
+        }
+
     }
 
     private void displayVehicles(ArrayList<Vehicle> vehicles) {
@@ -346,7 +380,6 @@ public class UserInterface {
             try {
                 System.out.print(prompt);
                 return Integer.parseInt(scanner.nextLine());
-
 
 
             } catch (NumberFormatException e) {

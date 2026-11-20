@@ -5,6 +5,8 @@ import com.pluralsight.dealershipmanager.model.LeaseContract;
 import com.pluralsight.dealershipmanager.model.SalesContract;
 import com.pluralsight.dealershipmanager.model.Vehicle;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.math.BigDecimal;
@@ -41,6 +43,17 @@ public class ContractDataManager {
         } else if (contract instanceof LeaseContract lease) {
             line += "|" + formatMoney(lease.getTotalPrice());
             line += "|" + formatMoney(lease.getMonthlyPayment());
+        }
+
+        try (FileWriter writer = new FileWriter("contracts.csv", true)) {
+
+            writer.write(line + "\n");
+
+            System.out.println("Contract saved successfully!");
+
+        } catch (IOException e) {
+
+            System.out.println("Error saving contract.");
         }
     }
 

@@ -360,6 +360,11 @@ public class UserInterface {
                 return;
             }
 
+            dealership.removeVehicle(selectedVehicle);
+
+            DealershipFileManager fileManager = new DealershipFileManager();
+            fileManager.saveDealership(dealership);
+
             contract = new LeaseContract(contractDate, customerName, customerEmail, selectedVehicle);
 
         } else {

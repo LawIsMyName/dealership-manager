@@ -1,5 +1,6 @@
 package com.pluralsight.dealershipmanager.ui;
 
+import com.pluralsight.dealershipmanager.data.ContractDataManager;
 import com.pluralsight.dealershipmanager.data.DealershipFileManager;
 import com.pluralsight.dealershipmanager.model.Dealership;
 import com.pluralsight.dealershipmanager.model.Vehicle;
@@ -337,6 +338,9 @@ public class UserInterface {
             System.out.println("Vehicle: " + selectedVehicle.getYear() + " " + selectedVehicle.getMake() + " " + selectedVehicle.getModel());
             System.out.printf("Total Price: $%.2f%n", contract.getTotalPrice());
             System.out.printf("Monthly Payment: $%.2f%n", contract.getMonthlyPayment());
+
+            ContractDataManager manager = new ContractDataManager();
+            manager.saveContract(contract);
 
             boolean financed = financeAnswer.equalsIgnoreCase("yes");
 

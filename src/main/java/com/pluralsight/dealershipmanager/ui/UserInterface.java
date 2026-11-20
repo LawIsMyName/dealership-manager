@@ -283,6 +283,11 @@ public class UserInterface {
         }
     }
 
+    private void processSellOrLeaseVehicleRequest() {
+        System.out.println("---- SELL OR LEASE VEHICLE ----");
+
+    }
+
     private void displayVehicles(ArrayList<Vehicle> vehicles) {
         if (vehicles == null || vehicles.isEmpty()) {
             System.out.println("No vehicles found.");

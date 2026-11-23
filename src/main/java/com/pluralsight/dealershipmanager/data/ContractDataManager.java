@@ -38,9 +38,25 @@ public class ContractDataManager {
         line += "|" + formatMoney(vehicle.getPrice());
 
         if (contract instanceof SalesContract sale) {
+            BigDecimal price = sale.getVehicleSold().getPrice();
+            BigDecimal salesTax = price.multiply(new BigDecimal("0.05"));
+            BigDecimal recordingFee = new BigDecimal("100.00");
+
+            line += "|" + formatMoney(salesTax);
+            line += "|" + formatMoney(recordingFee);
+            line += "|" + formatMoney(sale.getProcessingFee());
             line += "|" + formatMoney(sale.getTotalPrice());
+            line += "|" + (sale.isFinanced() ? "YES" : "NO");
             line += "|" + formatMoney(sale.getMonthlyPayment());
+
         } else if (contract instanceof LeaseContract lease) {
+            BigDecimal price = lease.getVehicleSold().getPrice();
+
+            BigDecimal endingValue = price.multiply(new BigDecimal("0.50")).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal leaseFee = price.multiply(new BigDecimal("0.07")).setScale(2, RoundingMode.HALF_UP);
+
+            line += "|" + formatMoney(endingValue);
+            line += "|" + formatMoney(leaseFee);
             line += "|" + formatMoney(lease.getTotalPrice());
             line += "|" + formatMoney(lease.getMonthlyPayment());
         }
